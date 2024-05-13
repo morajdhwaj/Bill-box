@@ -1,7 +1,7 @@
-import { View, Text } from "react-native";
-import React from "react";
-import tw from "twrnc";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import {View, Text} from 'react-native';
+import React from 'react';
+import tw from 'twrnc';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const ScannerScreen = () => {
   return (

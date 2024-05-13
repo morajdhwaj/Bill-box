@@ -1,27 +1,27 @@
-import React from "react";
-import { Alert, Share, Text, TouchableOpacity, View } from "react-native";
-import ImageZoomViewer from "react-native-image-zoom-viewer";
-import tw from "twrnc";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import axios from "axios";
-import Toast from "react-native-toast-message";
+import React from 'react';
+import {Alert, Share, Text, TouchableOpacity, View} from 'react-native';
+import ImageZoomViewer from 'react-native-image-zoom-viewer';
+import tw from 'twrnc';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
+import Toast from 'react-native-toast-message';
 
-const SingleBillScreen = ({ route, navigation }) => {
-  const { imageUrl, imageName, imageId, getAllBills } = route?.params;
+const SingleBillScreen = ({route, navigation}) => {
+  const {imageUrl, imageName, imageId, getAllBills} = route?.params;
 
   const deleteBill = () => {
     const options = {
-      method: "DELETE",
-      url: "https://billbox.catax.me/image/delete-image",
-      params: { image_id: imageId },
+      method: 'DELETE',
+      url: 'https://billbox.catax.me/image/delete-image',
+      params: {image_id: imageId},
     };
 
     axios
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        navigation.navigate("HomeScreen", "home");
+        navigation.navigate('HomeScreen', 'home');
         getAllBills();
       })
       .catch(function (error) {
@@ -30,22 +30,22 @@ const SingleBillScreen = ({ route, navigation }) => {
   };
 
   const handleDelete = () =>
-    Alert.alert("Delete file", `Are you want to delete ${imageName} bill`, [
+    Alert.alert('Delete file', `Are you want to delete ${imageName} bill`, [
       {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel",
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
       },
-      { text: "Delete", onPress: () => deleteBill() },
+      {text: 'Delete', onPress: () => deleteBill()},
     ]);
 
   const onShare = async () => {
     try {
       const result = await Share.share({
-        title: "App link",
+        title: 'App link',
         message:
-          "Please install this app and stay safe , AppLink :https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en",
-        url: "https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en",
+          'Please install this app and stay safe , AppLink :https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en',
+        url: 'https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -58,7 +58,7 @@ const SingleBillScreen = ({ route, navigation }) => {
       }
     } catch (error) {
       Toast.show({
-        type: "error",
+        type: 'error',
         text1: error?.message,
         text2: error?.message,
       });
@@ -88,10 +88,10 @@ const SingleBillScreen = ({ route, navigation }) => {
         </View>
       </View>
       <ImageZoomViewer
-        imageUrls={[{ url: imageUrl }]}
+        imageUrls={[{url: imageUrl}]}
         enableSwipeDown
         enablePreload
-        style={{ flex: 1 }}
+        style={{flex: 1}}
         renderIndicator={() => null}
       />
     </View>

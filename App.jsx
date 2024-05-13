@@ -29,10 +29,9 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      // screenOptions={{
-      //   headerShown: false,
-      // }}
-      >
+        screenOptions={{
+          headerShown: false,
+        }}>
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="IntroScreen" component={IntroScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
