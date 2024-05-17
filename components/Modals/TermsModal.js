@@ -6,21 +6,22 @@ import {
   Share,
   Modal,
   Pressable,
-} from "react-native";
-import React, { useState } from "react";
-import tw from "twrnc";
+} from 'react-native';
+import React, {useState} from 'react';
+import tw from 'twrnc';
 
-const TermsModal = ({ modalVisible, setModalVisible }) => {
+const TermsModal = ({modalVisible, setModalVisible}) => {
   return (
     <Modal
       animationType="slide"
       transparent={true}
+      style={tw`
+      `}
       visible={modalVisible}
       onRequestClose={() => {
         setModalVisible(!modalVisible);
-      }}
-    >
-      <View style={[tw` h-full w-full justify-end items-center px-5 py-4`]}>
+      }}>
+      <View style={[tw` h-full w-full justify-end items-center px-5 py-2`]}>
         <View style={[tw`bg-black  w-full   `]}>
           <View style={tw` my-4 flex gap-4`}>
             <Text style={tw`text-white text-xl font-semibold`}>
@@ -41,11 +42,9 @@ const TermsModal = ({ modalVisible, setModalVisible }) => {
           <View style={tw`flex  gap-2 `}>
             <TouchableOpacity
               style={tw`bg-[#00B386]   rounded-lg`}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
+              onPress={() => setModalVisible(!modalVisible)}>
               <Text
-                style={tw`text-white text-xl self-center font-semibold py-2 `}
-              >
+                style={tw`text-white text-xl self-center font-semibold py-2 `}>
                 OKAY
               </Text>
             </TouchableOpacity>
