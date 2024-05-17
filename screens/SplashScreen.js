@@ -10,7 +10,7 @@ const SplashScreen = ({navigation}) => {
   return (
     <View style={tw`h-full bg-black flex items-center justify-center`}>
       <Image
-        source={require('../assets/images/billbox-logo.jpeg')}
+        source={require('../assets/images/billbox-logo.png')}
         ImageBackground
         style={tw`h-28 w-28 rounded-full`}
       />
