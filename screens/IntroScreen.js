@@ -91,7 +91,7 @@ const IntroScreen = ({navigation}) => {
   const renderDoneButton = () => {
     return (
       <View style={tw`bg-[#00B386] rounded-full`}>
-        <Text style={tw`px-5 py-2 text-black `}>Get Started</Text>
+        <Text style={tw`px-5 py-2 text-white `}>Get Started</Text>
       </View>
     );
   };
