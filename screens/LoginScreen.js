@@ -31,7 +31,7 @@ const LoginScreen = ({navigation}) => {
       // Show toast alert if country is not selected
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Country not found',
         text2: 'Please select a country',
       });
       return;

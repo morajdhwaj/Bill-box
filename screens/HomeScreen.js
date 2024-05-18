@@ -1,7 +1,6 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import tw from 'twrnc';
-import HomeUpperTabs from '../components/HomeScreenComponents/HomeComponent';
 import HomeBottomTabs from '../components/HomeScreenComponents/HomeBottomTabs';
 import DocumentScanner from 'react-native-document-scanner-plugin';
 import UploadImage from '../components/HomeScreenComponents/UploadImage';
@@ -9,10 +8,26 @@ import BillsComponents from '../components/HomeScreenComponents/BillsComponents'
 import HomeComponent from '../components/HomeScreenComponents/HomeComponent';
 import RewardComponent from '../components/HomeScreenComponents/RewardComponent';
 import WarrantyComponent from '../components/HomeScreenComponents/WarrantyComponent';
+import {getEvents, initDatabase} from '../database/database';
 
 const HomeScreen = ({navigation, route}) => {
   const [scannedImage, setScannedImage] = useState('');
   const [tab, setTab] = useState('home');
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const initializeDatabase = async () => {
+      try {
+        await initDatabase();
+        const initialEvents = await getEvents();
+        setEvents(initialEvents);
+      } catch (error) {
+        console.error('Error initializing database:', error);
+      }
+    };
+
+    initializeDatabase();
+  }, []);
 
   const scanDocument = async () => {
     const {scannedImages} = await DocumentScanner.scanDocument({});
@@ -22,6 +37,7 @@ const HomeScreen = ({navigation, route}) => {
     }
   };
 
+  console.log(events);
   return (
     <View style={tw`bg-[#000] h-full flex justify-between `}>
       <View style={tw`h-[90%]`}>
@@ -48,17 +64,27 @@ const HomeScreen = ({navigation, route}) => {
         )}
         {tab === 'reward' && (
           <View>
-            <RewardComponent setTab={setTab} navigation={navigation} />
+            <RewardComponent
+              events={events}
+              setTab={setTab}
+              setEvents={setEvents}
+              navigation={navigation}
+            />
           </View>
         )}
-        {tab === 'warrant' && (
+        {tab === 'warranty' && (
           <View>
             <WarrantyComponent setTab={setTab} navigation={navigation} />
           </View>
         )}
       </View>
       <View style={tw`h-[10%]`}>
-        <HomeBottomTabs setTab={setTab} tab={tab} scanDocument={scanDocument} />
+        <HomeBottomTabs
+          setTab={setTab}
+          tab={tab}
+          scanDocument={scanDocument}
+          setEvents={setEvents}
+        />
       </View>
     </View>
   );
