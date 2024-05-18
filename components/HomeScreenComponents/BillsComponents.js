@@ -4,17 +4,17 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  Alert,
   TextInput,
   Share,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import tw from "twrnc";
-import axios from "axios";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import Ionicons from "react-native-vector-icons/Ionicons";
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import tw from 'twrnc';
+import axios from 'axios';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Toast from 'react-native-toast-message';
 
-const BillsComponents = ({ navigation, setTab }) => {
+const BillsComponents = ({navigation, setTab}) => {
   const [bills, setBills] = useState([]);
 
   useEffect(() => {
@@ -23,9 +23,9 @@ const BillsComponents = ({ navigation, setTab }) => {
 
   const getAllBills = () => {
     const options = {
-      method: "GET",
-      url: "https://billbox.catax.me/image/get-all-images",
-      params: { user_id: "66222aa6020a92d53d8566bd" },
+      method: 'GET',
+      url: 'https://billbox.catax.me/image/get-all-images',
+      params: {user_id: '66222aa6020a92d53d8566bd'},
     };
 
     axios
@@ -42,10 +42,10 @@ const BillsComponents = ({ navigation, setTab }) => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        title: "App link",
+        title: 'App link',
         message:
-          "Please install this app and stay safe , AppLink :https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en",
-        url: "https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en",
+          'Please install this app and stay safe , AppLink :https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en',
+        url: 'https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -58,14 +58,14 @@ const BillsComponents = ({ navigation, setTab }) => {
       }
     } catch (error) {
       Toast.show({
-        type: "error",
+        type: 'error',
         text1: error?.message,
         text2: error?.message,
       });
     }
   };
 
-  if (bills.length == 0) {
+  if (bills.length === 0) {
     return (
       <Text style={tw`text-white bg-black h-full p-5 text-center`}>
         Loading...
@@ -73,16 +73,15 @@ const BillsComponents = ({ navigation, setTab }) => {
     );
   }
 
-  console.log(bills[0].url, "bills");
-  console.log(bills[0].url, "dsdsdsdsd");
+  console.log(bills[0].url, 'bills');
+  console.log(bills[0].url, 'dsdsdsdsd');
 
   return (
     <View style={tw`bg-[#000] `}>
       <View
-        style={tw`flex flex-row w-full items-center justify-between px-5 mt-5`}
-      >
+        style={tw`flex flex-row w-full items-center justify-between px-5 mt-5`}>
         <View style={tw`flex flex-row gap-5`}>
-          <TouchableOpacity onPress={() => setTab("home")}>
+          <TouchableOpacity onPress={() => setTab('home')}>
             <AntDesign name="arrowleft" size={20} color="white" />
           </TouchableOpacity>
         </View>
@@ -101,16 +100,15 @@ const BillsComponents = ({ navigation, setTab }) => {
         </View>
       </View>
       <ScrollView style={tw` mt-5 mb-28 `}>
-        {bills?.reverse().map((bill) => {
+        {bills?.reverse().map(bill => {
           return (
             <View
               style={tw` py-4 px-5 flex flex-row justify-between border-b border-b-gray-800  `}
-              key={bill.id}
-            >
+              key={bill.id}>
               <View style={tw`flex flex-row gap-4 w-4/6`}>
                 <View>
                   <Image
-                    source={{ uri: bill?.url }}
+                    source={{uri: bill?.url}}
                     style={tw`h-14 w-14  rounded-full`}
                   />
                 </View>
@@ -130,8 +128,7 @@ const BillsComponents = ({ navigation, setTab }) => {
                     <Text style={tw`text-[10px] text-white`}>01/02/2024 </Text>
                     <Text style={tw`text-[10px] text-white`}>10:40 PM </Text>
                     <Text
-                      style={tw`text-white bg-[#0C241E] self-start text-[10px]   px-4 py-1 rounded-md  `}
-                    >
+                      style={tw`text-white bg-[#0C241E] self-start text-[10px]   px-4 py-1 rounded-md  `}>
                       Cash
                     </Text>
                   </View>
@@ -143,14 +140,13 @@ const BillsComponents = ({ navigation, setTab }) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate("SingleBillScreen", {
+                    navigation.navigate('SingleBillScreen', {
                       imageUrl: bill?.url,
                       imageName: bill?.image_name,
                       imageId: bill?.id,
                       getAllBills,
                     })
-                  }
-                >
+                  }>
                   <Ionicons name="eye-outline" size={20} color="#444" />
                 </TouchableOpacity>
               </View>

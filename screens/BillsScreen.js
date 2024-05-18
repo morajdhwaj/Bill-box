@@ -4,14 +4,15 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  Alert,
   TextInput,
+  Share,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import tw from 'twrnc';
 import axios from 'axios';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Toast from 'react-native-toast-message';
 
 const BillsScreen = ({navigation, setTab}) => {
   const [bills, setBills] = useState([]);
@@ -38,25 +39,33 @@ const BillsScreen = ({navigation, setTab}) => {
       });
   };
 
-  const deleteBill = id => {
-    const options = {
-      method: 'DELETE',
-      url: 'https://billbox.catax.me/image/delete-image',
-      params: {image_id: id},
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        getAllBills();
-      })
-      .catch(function (error) {
-        console.error(error);
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        title: 'App link',
+        message:
+          'Please install this app and stay safe , AppLink :https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en',
+        url: 'https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en',
       });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: error?.message,
+        text2: error?.message,
+      });
+    }
   };
 
-  if (bills.length == 0) {
+  if (bills.length === 0) {
     return (
       <Text style={tw`text-white bg-black h-full p-5 text-center`}>
         Loading...
@@ -68,28 +77,29 @@ const BillsScreen = ({navigation, setTab}) => {
   console.log(bills[0].url, 'dsdsdsdsd');
 
   return (
-    <View style={tw`bg-[#121212] `}>
+    <View style={tw`bg-[#000] `}>
       <View
         style={tw`flex flex-row w-full items-center justify-between px-5 mt-5`}>
         <View style={tw`flex flex-row gap-5`}>
           <TouchableOpacity onPress={() => setTab('home')}>
             <AntDesign name="arrowleft" size={20} color="white" />
           </TouchableOpacity>
-          <Text style={tw`text-white text-lg font-semibold`}>Bills</Text>
         </View>
         <View style={tw`flex flex-row items-center gap-5`}>
           <TextInput
-            style={tw`   text-white  text-xs w-40 border border-[#444] h-9 px-4  rounded-full`}
+            style={tw`   text-white  text-xs w-60 border border-[#444] h-9 px-4  rounded-full`}
             placeholder="Search bills"
             placeholderTextColor="#999999"
             maxLength={10}
           />
+        </View>
+        <View>
           <TouchableOpacity>
             <AntDesign name="filter" size={25} color="#00B386" />
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView style={tw` mt-5 `}>
+      <ScrollView style={tw` mt-5 mb-28 `}>
         {bills?.reverse().map(bill => {
           return (
             <View
@@ -125,7 +135,7 @@ const BillsScreen = ({navigation, setTab}) => {
                 </View>
               </View>
               <View style={tw`flex items-center gap-4`}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onShare}>
                   <Ionicons name="share-social" size={20} color="#888" />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -134,6 +144,7 @@ const BillsScreen = ({navigation, setTab}) => {
                       imageUrl: bill?.url,
                       imageName: bill?.image_name,
                       imageId: bill?.id,
+                      getAllBills,
                     })
                   }>
                   <Ionicons name="eye-outline" size={20} color="#444" />
