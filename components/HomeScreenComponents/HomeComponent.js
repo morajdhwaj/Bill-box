@@ -10,7 +10,7 @@ const HomeComponent = ({navigation}) => {
     <View style={tw`p-5 flex flex-row justify-between`}>
       <View style={tw`flex flex-row items-center gap-4`}>
         <Image
-          source={require('../../assets/images/billbox-logo.png')}
+          source={require('../../assets/images/billbox.png')}
           ImageBackground
           style={tw`h-10 w-10 rounded-full`}
         />
