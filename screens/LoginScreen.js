@@ -4,6 +4,7 @@ import tw from 'twrnc';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import CountryPicker, {DARK_THEME} from 'react-native-country-picker-modal';
 import Toast from 'react-native-toast-message';
+import {WrapperComponent, showMyComponent} from 'concur-mobile';
 
 const LoginScreen = ({navigation}) => {
   const [mobileNumber, setMobileNumber] = useState('');
@@ -17,6 +18,8 @@ const LoginScreen = ({navigation}) => {
   const [withAlphaFilter, setWithAlphaFilter] = useState(false);
   const [withCallingCode, setWithCallingCode] = useState(true);
   const mobileNumberRef = useRef(null);
+  const [isMyComponentVisible, setMyComponentVisible] = useState(false);
+  const [navigate, setNavigate] = useState(false);
 
   const onSelect = country => {
     setCountryCode(country.cca2);
@@ -40,6 +43,26 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate('LoginOTPScreen');
   };
 
+  const handleOpenMyComponent = () => {
+    if (!country) {
+      // Show toast alert if country is not selected
+      Toast.show({
+        type: 'error',
+        text1: 'Country not found',
+        text2: 'Please select a country',
+      });
+      return;
+    }
+    //
+    setMyComponentVisible(true);
+    setNavigate(true);
+  };
+
+  const handleCloseMyComponent = () => {
+    setMyComponentVisible(false);
+  };
+
+  console.log(navigate);
   return (
     <View style={tw`h-full bg-[#000]`}>
       <View
@@ -93,14 +116,34 @@ const LoginScreen = ({navigation}) => {
           </View>
         </View>
         <View style={tw`mx-5`}>
-          <TouchableOpacity
-            style={tw`bg-[#00B386] mt-10 rounded-xl`}
-            onPress={handleSubmit}>
-            <Text
-              style={tw`text-white text-2xl self-center font-semibold py-2  `}>
-              Next
-            </Text>
-          </TouchableOpacity>
+          <WrapperComponent
+            visible={isMyComponentVisible}
+            onClose={handleCloseMyComponent}
+            cp_id={'66becc284e27fa8b208fec8c'}
+            app_id={'7d4bf412b5bed2db'}
+            org_id={'66beca844e27fa8b208fec8a'}
+            org_key={'j_dmQ-tPHY7V6-U1YVIHcQ'}
+            org_secret={'1nULp1-TtE_5RZZ09Yk7cBouHggm_7PtwF8owbUMrFc'}
+          />
+          {navigate ? (
+            <TouchableOpacity
+              style={tw`bg-[#00B386] mt-10 rounded-xl`}
+              onPress={handleSubmit}>
+              <Text
+                style={tw`text-white text-2xl self-center font-semibold py-2  `}>
+                Next
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={tw`bg-[#00B386] mt-10 rounded-xl`}
+              onPress={handleOpenMyComponent}>
+              <Text
+                style={tw`text-white text-2xl self-center font-semibold py-2`}>
+                Next
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </View>

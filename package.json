@@ -16,6 +16,9 @@
     "@react-navigation/native-stack": "^6.9.13",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
+    "concur-mobile": "^1.6.6",
+    "esm": "^3.2.25",
+    "my-unique-package1": "^1.2.0",
     "react": "18.2.0",
     "react-native": "0.72.3",
     "react-native-app-intro-slider": "^4.0.4",
@@ -32,6 +35,8 @@
     "react-native-vector-icons": "^10.0.0",
     "react-native-vision-camera": "^2.15.5",
     "react-redux": "^8.1.2",
+    "strip-ansi": "^5.2.0",
+    "strip-ansi-cjs": "6",
     "twrnc": "^3.6.3"
   },
   "devDependencies": {
