@@ -2973,10 +2973,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
-concur-mobile@^1.7.8:
-  version "1.7.8"
-  resolved "https://registry.yarnpkg.com/concur-mobile/-/concur-mobile-1.7.8.tgz#755340e2aa8e5123559ab9b0e229d04545b4686d"
-  integrity sha512-nIrPYK6HEZNgl0HHhKIYDaz4HbZg8L0S35THyXiMK2cFBppSqGizIB04odNVpLGajy5SCfKR6h35YYgSlHv0RQ==
+concur-mobile@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/concur-mobile/-/concur-mobile-1.8.0.tgz#cecf428b7e0c68741cb3fdf16f2e2f9ede77b5fe"
+  integrity sha512-1JrzLX+Il2XOtwT844ooYuoyw9MkwDG802R9gSlTfpDtHQiiCzA86QTGhmDnuM6dxaxDYYWnZlSTmx9Iv/uCfA==
   dependencies:
     axios "^1.7.2"
     react-native-render-html "^6.3.4"

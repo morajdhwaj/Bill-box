@@ -16,7 +16,7 @@
     "@react-navigation/native-stack": "^6.9.13",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
-    "concur-mobile": "^1.7.8",
+    "concur-mobile": "^1.8.0",
     "esm": "^3.2.25",
     "my-unique-package1": "^1.2.0",
     "react": "18.2.0",
