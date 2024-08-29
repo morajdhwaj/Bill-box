@@ -119,11 +119,11 @@ const LoginScreen = ({navigation}) => {
           <WrapperComponent
             visible={isMyComponentVisible}
             onClose={handleCloseMyComponent}
-            cp_id={'66becc284e27fa8b208fec8c'}
-            app_id={'7d4bf412b5bed2db'}
-            org_id={'66beca844e27fa8b208fec8a'}
-            org_key={'j_dmQ-tPHY7V6-U1YVIHcQ'}
-            org_secret={'1nULp1-TtE_5RZZ09Yk7cBouHggm_7PtwF8owbUMrFc'}
+            cp_id={'66d03022cbd66ef0ea36279c'}
+            app_id={'183ee137c719c521'}
+            org_id={'66d02f52cbd66ef0ea36279a'}
+            org_key={'7nH14mBPv_sSithC8QAKWA'}
+            org_secret={'wbEcPWKD1hhYuae-LWtss-qGClaXrcRTkfFUqIZkq30'}
           />
           {navigate ? (
             <TouchableOpacity
