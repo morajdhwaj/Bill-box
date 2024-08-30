@@ -4,7 +4,7 @@ import tw from 'twrnc';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import CountryPicker, {DARK_THEME} from 'react-native-country-picker-modal';
 import Toast from 'react-native-toast-message';
-import {WrapperComponent, showMyComponent} from 'concur-mobile';
+import {WrapperComponent} from 'concur-mobile';
 
 const LoginScreen = ({navigation}) => {
   const [mobileNumber, setMobileNumber] = useState('');
